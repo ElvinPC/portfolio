@@ -1,0 +1,63 @@
+{% load static %}
+{% load i18n %}
+
+<header class="black-bg mh-header mh-fixed-nav nav-scroll mh-xs-mobile-nav wow fadeInUp" id="mh-header">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <nav class="navbar navbar-expand-lg mh-nav nav-btn">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#mh-home">{% trans 'Home' %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#mh-about">{% trans 'About' %}</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link" href="#mh-skills">{% trans 'Skills' %}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#mh-experience">{% trans 'Experiences' %}</a>
+                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#mh-portfolio">{% trans 'Portfolio' %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#mh-testimonial">{% trans 'Reviews' %}</a>
+                         </li>
+                        <li class="nav-item">
+                           <a class="nav-link" href="#mh-contact">{% trans 'Contact' %}</a>
+                        </li>
+
+                        {# LOGIN / LOGOUT tugmalari #}
+                        {% if user.is_authenticated %}
+<li class="nav-item">
+  <form action="{% url 'pages:logout' %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="nav-link btn btn-link" style="padding:0;">
+      Logout
+    </button>
+  </form>
+</li>
+{% else %}
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'pages:login' %}">Login</a>
+</li>
+{% endif %}
+
+
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+

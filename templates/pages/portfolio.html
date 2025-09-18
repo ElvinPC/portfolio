@@ -1,0 +1,83 @@
+{% load static %}
+{% load i18n %}
+
+<section class="mh-portfolio" id="mh-portfolio">
+    <div class="container">
+        <div class="row section-separator">
+            <div class="section-title col-sm-12 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s">
+                <h3>{% trans 'Portfolios' %}</h3>
+            </div>
+            <div class="part col-sm-12">
+                <div class="portfolio-nav col-sm-12" id="filter-button">
+                    <ul>
+
+                            <li data-filter="*" class="current wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s">
+                                <span>All Categories</span>
+                            </li>
+                            {% for tag in tags %}
+                                <li data-filter=".tag-{{ tag.id }}" class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
+                                    <span>{{ tag.title }}</span>
+                                </li>
+                            {% endfor %}
+
+
+                    </ul>
+                </div>
+                <div class="mh-project-gallery col-sm-12 wow fadeInUp" id="project-gallery" data-wow-duration="0.8s" data-wow-delay="0.5s">
+                    <div class="portfolioContainer row">
+                        {% for post in posts %}
+                            <div class="grid-item col-md-4 col-sm-6 col-xs-12
+                            {% for tag in post.tags.all %}
+                                    tag-{{ tag.id }}
+                            {% endfor %}">
+                                <figure>
+                                    <img src="{{ post.image1.url }}" alt="img04">
+                                    <figcaption class="fig-caption">
+                                        <i class="fa fa-search"></i>
+                                        <h5 class="title">{{ post.title }}</h5>
+
+                                        <a data-fancybox data-src="#{{ post.id }}"></a>
+
+                                    </figcaption>
+                                </figure>
+                            </div>
+
+                        {% endfor %}
+
+                    </div> <!-- End: .grid .project-gallery -->
+                </div> <!-- End: .grid .project-gallery -->
+            </div> <!-- End: .part -->
+        </div> <!-- End: .row -->
+    </div>
+    {% for post in posts %}
+        <div class="mh-portfolio-modal" id="{{ post.id }}">
+            <div class="container">
+                <div class="row mh-portfolio-modal-inner">
+                    <div class="col-sm-5">
+                        <h2>{{ post.title }}</h2>
+                        <p>{{ post.description }}.</p>
+
+
+                        <div class="mh-about-tag">
+                            <ul>
+
+                                <li><span>{{ post.language }}</span></li>
+
+                            </ul>
+                        </div>
+                        <a href="{{ post.url }}" class="btn btn-fill">start</a>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="mh-portfolio-modal-img">
+                            <img src="{{ post.image1.url }}" alt="" class="img-fluid">
+
+                            <img src="{{ post.image2.url }}" alt="" class="img-fluid">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+</section>

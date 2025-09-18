@@ -1,0 +1,27 @@
+{% load static %}
+{% load i18n %}
+
+<section class="mh-testimonial" id="mh-testimonial">
+    <div class="home-v-img">
+        <div class="container">
+            <div class="row section-separator">
+                <div class="col-sm-12 section-title wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
+                    <h3>{% trans 'Reviews' %}</h3>
+                </div>
+                <div class="col-sm-12 wow fadeInUp" id="mh-client-review" data-wow-duration="0.8s" data-wow-delay="0.3s">
+                    {% for cl in clients %}
+                        <div class="each-client-item">
+                            <div class="mh-client-item dark-bg black-shadow-1">
+                                <img src="{{ MEDIA_URL }}{{ cl.image.url }}" alt="" class="img-fluid">
+                                <p>{{ cl.description }}</p>
+                                <h4>{{ cl.name }}</h4>
+                                <span>{{ cl.job }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
