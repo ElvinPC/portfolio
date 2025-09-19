@@ -12,9 +12,6 @@ from configapp.forms import ContactForm, UserLoginForm
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 
-from configapp.models import PortfolioTagModel
-
-
 class PortfolioView(FormMixin, ListView):
     template_name = 'index.html'
     model = models.PortfolioModel
@@ -61,84 +58,6 @@ def logout_view(request):
     logout(request)
     return redirect('/')
 
-# from django.http import HttpResponse
-# from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
-# from reportlab.lib.styles import getSampleStyleSheet
-# from reportlab.lib import colors
-# from io import BytesIO
-#
-# from .models import PortfolioModel, TechnicalSkillsModel, ProfessionalSkillsModel, EducationModel, WorkExperienceModel
-#
-# def download_resume(request):
-#     """
-#     Baza ma'lumotlaridan PDF rezume yaratish
-#     """
-#     buffer = BytesIO()
-#     doc = SimpleDocTemplate(buffer, pagesize=(595, 842))  # A4
-#
-#     styles = getSampleStyleSheet()
-#     story = []
-#
-#     # Sarlavha
-#     story.append(Paragraph("Rezume", styles["Title"]))
-#     story.append(Spacer(1, 12))
-#
-#     # Portfolio
-#     story.append(Paragraph("Portfolio", styles["Heading2"]))
-#     for p in PortfolioModel.objects.all():
-#         story.append(Paragraph(f"<b>{p.title}</b> ({p.language})", styles["Normal"]))
-#         story.append(Paragraph(p.description, styles["Normal"]))
-#         story.append(Spacer(1, 6))
-#
-#     story.append(Spacer(1, 12))
-#
-#     # Technical Skills
-#     story.append(Paragraph("Texnik ko'nikmalar", styles["Heading2"]))
-#     data = [["Til", "Foiz"]]
-#     for skill in TechnicalSkillsModel.objects.all():
-#         data.append([skill.lang, f"{skill.value}%"])
-#     table = Table(data, colWidths=[200, 100])
-#     table.setStyle(TableStyle([
-#         ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
-#         ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
-#         ('ALIGN', (1, 1), (-1, -1), 'CENTER')
-#     ]))
-#     story.append(table)
-#     story.append(Spacer(1, 12))
-#
-#     # Professional Skills
-#     story.append(Paragraph("Professional ko'nikmalar", styles["Heading2"]))
-#     data = [["Ko'nikma", "Foiz"]]
-#     for skill in ProfessionalSkillsModel.objects.all():
-#         data.append([skill.title, f"{skill.value}%"])
-#     table = Table(data, colWidths=[200, 100])
-#     table.setStyle(TableStyle([
-#         ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
-#         ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
-#         ('ALIGN', (1, 1), (-1, -1), 'CENTER')
-#     ]))
-#     story.append(table)
-#     story.append(Spacer(1, 12))
-#
-#     # Education
-#     story.append(Paragraph("Ta'lim", styles["Heading2"]))
-#     for edu in EducationModel.objects.all():
-#         story.append(Paragraph(f"<b>{edu.name}</b> ({edu.year})", styles["Normal"]))
-#         story.append(Spacer(1, 6))
-#
-#     # Work Experience
-#     story.append(Paragraph("Ish tajribasi", styles["Heading2"]))
-#     for work in WorkExperienceModel.objects.all():
-#         story.append(Paragraph(f"<b>{work.name}</b> ({work.year})", styles["Normal"]))
-#         story.append(Spacer(1, 6))
-#
-#     doc.build(story)
-#     buffer.seek(0)
-#
-#     response = HttpResponse(buffer, content_type='application/pdf')
-#     response['Content-Disposition'] = 'attachment; filename="rezume.pdf"'
-#     return response
-# configapp/views.py
 from django.http import HttpResponse
 from reportlab.lib.pagesizes import A4
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
@@ -146,7 +65,6 @@ from reportlab.lib.styles import getSampleStyleSheet
 from .models import ResumeModel
 
 def download_resume(request):
-    # Admin panelda kiritilgan eng oxirgi rezumeni olib kelamiz:
     resume = ResumeModel.objects.last()
 
     response = HttpResponse(content_type='application/pdf')
