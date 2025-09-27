@@ -9,14 +9,13 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
-from django.conf.global_settings import EMAIL_BACKEND, EMAIL_HOST, EMAIL_PORT
+from django.conf.global_settings import EMAIL_BACKEND, EMAIL_HOST, EMAIL_PORT, STATICFILES_DIRS, STATIC_ROOT
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -27,7 +26,7 @@ SECRET_KEY = 'django-insecure-l4yhc$%cnpglb*pje!w#ioew)53p3=ra^q&hi45y2a-6yx*!9j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', '138.68.105.159']
 
 # Application definition
 
@@ -102,21 +101,19 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    os.path.join(BASE_DIR, 'config/static/'),
 ]
-# STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static',
+# ]
 MEDIA_URL = '/media/'
-# MEDIA_ROOT = BASE_DIR / 'media'
-LOGIN_REDIRECT_URL = '/'   # login bo‘lgandan keyin qayerga yuborilsin
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+LOGIN_REDIRECT_URL = '/'  # login bo‘lgandan keyin qayerga yuborilsin
 LOGOUT_REDIRECT_URL = '/'
-# EMAIL_BACKEND ='django.core.mail.backend.smtp.EmailBackend'
-# EMAIL_HOST ='smtp.gmail.com'
-# EMAIL_PORT =587
-# EMAIL_HOST_USER =
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

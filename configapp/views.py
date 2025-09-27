@@ -38,7 +38,7 @@ class PortfolioView(FormMixin, ListView):
         context['educations'] = models.EducationModel.objects.all()
         context['works'] = models.WorkExperienceModel.objects.all()
         context['languages'] = models.WorkLanguageModel.objects.all()
-        portfolio = models.PortfolioModel.objects.first()  # birinchi portfoliodan CV olish
+        portfolio = models.PortfolioModel.objects.first()
         context['cv_file'] = portfolio.cv.url if portfolio and portfolio.cv else None
 
         return context
