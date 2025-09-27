@@ -70,7 +70,7 @@ class ContactModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.email
+        return f"{self.first_name} {self.last_name} ({self.email})"
 
     class Meta:
         verbose_name = _("Contact")

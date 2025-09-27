@@ -2,7 +2,7 @@ from typing import Any
 
 from django.http import request
 from django.urls import reverse_lazy
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import FormMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -98,3 +98,18 @@ def download_resume(request):
 
     doc.build(elements)
     return response
+
+
+from django.shortcuts import redirect
+from .models import ContactModel
+
+def contact_submit(request):
+    if request.method == "POST":
+        ContactModel.objects.create(
+            first_name=request.POST.get("first_name"),
+            last_name=request.POST.get("last_name"),
+            email=request.POST.get("email"),
+            message=request.POST.get("message"),
+        )
+        return redirect('/')
+    return redirect('/')

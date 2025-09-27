@@ -13,4 +13,5 @@ urlpatterns = [
     path('login/', views.LoginView.as_view(template_name='auth/login.html'), name='login'),
     path('logout/', views.LogoutView.as_view(next_page='/'), name='logout'),
     path('download-resume/', views.download_resume, name='download_resume'),
+    path('contact-submit/', views.contact_submit, name='contact_submit')
 ]
