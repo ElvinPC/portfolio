@@ -101,13 +101,18 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-# settings.py
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'assets']   # bu yerda manbalar
-STATIC_ROOT = BASE_DIR / 'static'          # collectstatic shu yerga yig‘adi
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'assets'
+]
+
+# Yig‘ilgan static fayllar shu joyga tushadi
+STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
 
 
 LOGIN_REDIRECT_URL = '/'  # login bo‘lgandan keyin qayerga yuborilsin
