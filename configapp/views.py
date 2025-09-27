@@ -99,17 +99,3 @@ def download_resume(request):
     doc.build(elements)
     return response
 
-
-from django.shortcuts import redirect
-from .models import ContactModel
-
-def contact_submit(request):
-    if request.method == "POST":
-        ContactModel.objects.create(
-            first_name=request.POST.get("first_name"),
-            last_name=request.POST.get("last_name"),
-            email=request.POST.get("email"),
-            message=request.POST.get("message"),
-        )
-        return redirect('/')
-    return redirect('/')
